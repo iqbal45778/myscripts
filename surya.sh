@@ -40,8 +40,6 @@ export OUTFILE=${OUTDIR}/arch/arm64/boot/dtb.img
 export OUTFILE=${OUTDIR}/arch/arm64/boot/dtbo.img
 export KBUILD_BUILD_USER=IqbAl
 export KBUILD_BUILD_HOST=NajLa
-export CLANG_PATH=${KERNELDIR}/clang/clang-r498229b
-export PATH=${CLANG_PATH}/bin:${PATH}
 export ARCH=arm64
 export DATE=$(TZ=Asia/Jakarta date)
 # Kernel groups
@@ -51,7 +49,7 @@ CI_CHANNEL=-1001488385343
 KERNELRELEASE=surya
 
 # Clang is annoying
-PATH="${KERNELDIR}/clang/clang-r498229b/bin:${PATH}"
+PATH="${KERNELDIR}/gcc32/bin:${KERNELDIR}/gcc/bin:/usr/bin:$PATH"
 
 # Set date and time
 DATE=$(TZ=Asia/Jakarta date)
@@ -110,7 +108,7 @@ makekernel() {
 	CROSS_COMPILE="${KERNELDIR}/gcc/bin/aarch64-none-linux-gnu-" \
 	CROSS_COMPILE_COMPAT="${KERNELDIR}/gcc32/bin/arm-none-linux-gnueabihf-"
     else
-	    make -j$(nproc --all) O=out ARCH=arm64 CROSS_COMPILE=aarch64-elf- CROSS_COMPILE_ARM32=arm-eabi- LD=${KERNELDIR}/bin/aarch64-elf-ld AR=aarch64-elf-ar AS=aarch64-elf-as NM=aarch64-elf-nm OBJDUMP=aarch64-elf-objdump OBJCOPY=aarch64-elf-objcopy CC=aarch64-elf-gcc
+	    make -j$(nproc --all) O=out ARCH=arm64 CROSS_COMPILE=aarch64-elf- CROSS_COMPILE_ARM32=arm-eabi- LD=${KERNELDIR}/gcc/bin/aarch64-elf-ld AR=aarch64-elf-ar AS=aarch64-elf-as NM=aarch64-elf-nm OBJDUMP=aarch64-elf-objdump OBJCOPY=aarch64-elf-objcopy CC=aarch64-elf-gcc
     fi
 
     # Check if compilation is done successfully.
