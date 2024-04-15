@@ -23,9 +23,11 @@ if [[ "${COMPILER_TYPES}" =~ "clang" ]]; then
 	COMPILER_STRING='google clang 17'
         COMPILER_TYPE='google clang 17'
 else
-        # Default to GCC from Arter
-        git clone https://github.com/mvaisakh/gcc-arm64 -b gcc-master --depth=1 "${KERNELDIR}/gcc"
-        git clone https://github.com/kdrag0n/arm-eabi-gcc --depth=1 "${KERNELDIR}/gcc32"
+        # Default to GCC
+       curl -sL https://github.com/cyberknight777/gcc-arm/archive/refs/heads/master.tar.gz | tar -xzf -
+    mv $(pwd)/gcc-arm-master ${KERNELDIR}/gcc32
+	curl -sL https://github.com/cyberknight777/gcc-arm64/archive/refs/heads/master.tar.gz | tar -xzf -
+    mv $(pwd)/gcc-arm64-master ${KERNELDIR}/gcc
         COMPILER_STRING='GCC'
 	COMPILER_TYPE='GCC'
 fi    
