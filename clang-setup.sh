@@ -24,7 +24,7 @@ if [[ "${COMPILER_TYPES}" =~ "clang" ]]; then
         COMPILER_TYPE='google clang 17'
 else
         # Default to GCC
-        git clone https://github.com/najahiiii/aarch64-linux-gnu.git -b linaro8-20190216 --depth=1 "${KERNELDIR}/gcc"
+        git clone https://github.com/kdrag0n/aarch64-elf-gcc --depth=1 "${KERNELDIR}/gcc"
         git clone https://github.com/kdrag0n/arm-eabi-gcc --depth=1 "${KERNELDIR}/gcc32"
         COMPILER_STRING='GCC'
 	COMPILER_TYPE='GCC'
