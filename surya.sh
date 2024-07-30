@@ -180,7 +180,6 @@ START=$(date +"%s")
 makekernel || exit 1
 shipkernel
 setksu
-setver2
 makekernel || exit 1
 shipkernel
 END=$(date +"%s")
