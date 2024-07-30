@@ -39,7 +39,7 @@ export OUTFILE=${OUTDIR}/arch/arm64/boot/Image.gz
 export OUTFILE=${OUTDIR}/arch/arm64/boot/dtb.img
 export OUTFILE=${OUTDIR}/arch/arm64/boot/dtbo.img
 export KBUILD_BUILD_HOST=AOSPA-TOPAZ
-export CLANG_PATH=${KERNELDIR}/clang/clang-r383902
+export CLANG_PATH=${KERNELDIR}/clang/clang-r416183b
 export PATH=${CLANG_PATH}/bin:${PATH}
 export ARCH=arm64
 export DATE=$(TZ=Asia/Jakarta date)
@@ -50,7 +50,7 @@ CI_CHANNEL=-1001488385343
 KERNELRELEASE=surya
 
 # Clang is annoying
-PATH="${KERNELDIR}/clang/clang-r383902/bin:${PATH}"
+PATH="${KERNELDIR}/clang/clang-r416183b/bin:${PATH}"
 
 # Set date and time
 DATE=$(TZ=Asia/Jakarta date)
