@@ -38,8 +38,8 @@ DISTRO=$(source /etc/os-release && echo ${NAME})
 export OUTFILE=${OUTDIR}/arch/arm64/boot/Image.gz
 export OUTFILE=${OUTDIR}/arch/arm64/boot/dtb.img
 export OUTFILE=${OUTDIR}/arch/arm64/boot/dtbo.img
-export KBUILD_BUILD_HOST=AOSPA-TOPAZ
-export CLANG_PATH=${KERNELDIR}/clang/clang-r416183b
+export KBUILD_BUILD_HOST=android
+export CLANG_PATH=${KERNELDIR}/clang/clang-r498229b
 export PATH=${CLANG_PATH}/bin:${PATH}
 export ARCH=arm64
 export DATE=$(TZ=Asia/Jakarta date)
@@ -50,7 +50,7 @@ CI_CHANNEL=-1001488385343
 KERNELRELEASE=surya
 
 # Clang is annoying
-PATH="${KERNELDIR}/clang/clang-r416183b/bin:${PATH}"
+PATH="${KERNELDIR}/clang/clang-r498229b/bin:${PATH}"
 
 # Set date and time
 DATE=$(TZ=Asia/Jakarta date)
@@ -140,29 +140,6 @@ shipkernel() {
     cd ..
 }
 
-# Ship China firmware builds
-setksu() {
-    export KSU=KSU
-    # Pick DSP change
-    sed -i 's/CONFIG_KSU=n/CONFIG_KSU=y/g' arch/arm64/configs/${DEFCONFIG}
-    echo -e "KSU ready"
-}
-
-# Ship China firmware builds
-clearout() {
-    # Pick DSP change
-    rm -rf out
-    mkdir -p out
-}
-
-#Setver 2 for ksu
-setver2() {
-    KERNELNAME="${KERNEL}-${KERNELRELEASE}-KSU-${ZIP_DATE}"
-    export KERNELTYPE KERNELNAME
-    export TEMPZIPNAME="${KERNELNAME}-unsigned.zip"
-    export ZIPNAME="${KERNELNAME}.zip"
-}
-
 ## Start the kernel buildflow ##
 setversioning
 tg_channelcast "Docker OS: <code>$DISTRO</code>" \
@@ -177,9 +154,6 @@ tg_channelcast "Docker OS: <code>$DISTRO</code>" \
         "Host Core Count: <code>${PROCS} core(s)</code>" \
 	"Commit point: <code>${COMMIT_POINT}</code>"
 START=$(date +"%s")
-makekernel || exit 1
-shipkernel
-setksu
 makekernel || exit 1
 shipkernel
 END=$(date +"%s")
