@@ -17,7 +17,7 @@ COMPILER_TYPES=clang
 
 # Pick your poison
 if [[ "${COMPILER_TYPES}" =~ "clang" ]]; then
-        git clone https://android.googlesource.com/platform/prebuilts/clang/host/linux-x86 -b android-msm-coral-4.14-android13 --depth=1  "${KERNELDIR}/clang"
+        git clone https://android.googlesource.com/platform/prebuilts/clang/host/linux-x86 -b main --depth=1  "${KERNELDIR}/clang"
 	git clone https://github.com/Kyvangka1610/gcc-arm-10.2-2020.11-x86_64-aarch64-none-linux-gnu --depth=1 "${KERNELDIR}/gcc"
         git clone https://github.com/Kyvangka1610/gcc-arm-10.2-2020.11-x86_64-arm-none-linux-gnueabihf --depth=1 "${KERNELDIR}/gcc32"
 	COMPILER_STRING='google clang 12'
