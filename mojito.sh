@@ -144,7 +144,7 @@ shipkernel() {
 setversioning
 tg_channelcast "Docker OS: <code>$DISTRO</code>" \
         "Compiler: <code>${COMPILER_STRING}</code>" \
-	"Device: <code>Poco X3 NFC (surya)</code>" \
+	"Device: <code>Redmi Note 10 (sunny/mojito)</code>" \
 	"Linux Version: <code>$(make kernelversion)</code>" \
         "Date: <code>$DATE</code>" \
 	"Branch: <code>${PARSE_BRANCH}</code>" \
@@ -158,4 +158,4 @@ makekernel || exit 1
 shipkernel
 END=$(date +"%s")
 DIFF=$(( END - START ))
-tg_channelcast "Build for Poco X3 NFC with ${COMPILER_STRING} <b>succeed</b> took $((DIFF / 60)) minute(s) and $((DIFF % 60)) second(s)!"
+tg_channelcast "Build for Redmi Note 10 with ${COMPILER_STRING} <b>succeed</b> took $((DIFF / 60)) minute(s) and $((DIFF % 60)) second(s)!"
