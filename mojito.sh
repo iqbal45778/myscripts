@@ -92,7 +92,7 @@ kernelstringfix() {
 makekernel() {
     # Clean any old AnyKernel
     rm -rf ${ANYKERNEL}
-    git clone https://github.com/Aex-Mod/AnyKernel3 -b surya anykernel3
+    git clone https://github.com/iqbal45778/AnyKernel3 -b mojito anykernel3
     kernelstringfix
     make O=out ARCH=arm64 ${DEFCONFIG}
     if [[ "${COMPILER_TYPE}" =~ "clang"* ]]; then
