@@ -107,7 +107,7 @@ makekernel() {
 	OBJCOPY=llvm-objcopy \
 	OBJDUMP=llvm-objdump \
 	CROSS_COMPILE="${KERNELDIR}/gcc/bin/aarch64-none-linux-gnu-" \
-	CROSS_COMPILE_COMPAT="${KERNELDIR}/gcc32/bin/arm-none-linux-gnueabihf-"
+	CROSS_COMPILE_ARM32="${KERNELDIR}/gcc32/bin/arm-none-linux-gnueabihf-"
     else
 	    make -j$(nproc --all) O=out ARCH=arm64 CROSS_COMPILE="${KERNELDIR}/gcc/bin/aarch64-elf-" CROSS_COMPILE_ARM32="${KERNELDIR}/gcc32/bin/arm-eabi-"
     fi
