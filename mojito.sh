@@ -96,18 +96,7 @@ makekernel() {
     kernelstringfix
     make O=out ARCH=arm64 ${DEFCONFIG}
     if [[ "${COMPILER_TYPE}" =~ "clang"* ]]; then
-        make -j$(nproc --all) \
-	O=out \
-	CC="${ccache_} clang" \
-	AS=llvm-as \
-	LD=ld.lld \
-	AR=llvm-ar \
-	NM=llvm-nm \
-	STRIP=llvm-strip \
-	OBJCOPY=llvm-objcopy \
-	OBJDUMP=llvm-objdump \
-	CROSS_COMPILE="${KERNELDIR}/gcc/bin/aarch64-none-linux-gnu-" \
-	CROSS_COMPILE_ARM32="${KERNELDIR}/gcc32/bin/arm-none-linux-gnueabihf-"
+        make -j$(nproc --all) CC=clang CROSS_COMPILE="${KERNELDIR}/gcc/bin/aarch64-elf-" CROSS_COMPILE_ARM32="${KERNELDIR}/gcc32/bin/arm-eabi" O=out ARCH=arm64
     else
 	    make -j$(nproc --all) O=out ARCH=arm64 CROSS_COMPILE="${KERNELDIR}/gcc/bin/aarch64-elf-" CROSS_COMPILE_ARM32="${KERNELDIR}/gcc32/bin/arm-eabi-"
     fi
