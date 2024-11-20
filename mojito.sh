@@ -108,8 +108,8 @@ makekernel() {
 	OBJDUMP=llvm-objdump \
 	CROSS_COMPILE="${KERNELDIR}/gcc/bin/aarch64-elf-" \
         CROSS_COMPILE_COMPAT="${KERNELDIR}/gcc32/bin/arm-eabi-"
-	
-	    make -j$(nproc --all) O=out ARCH=arm64 CROSS_COMPILE="${KERNELDIR}/gcc/bin/aarch64-elf-" CROSS_COMPILE_COMPAT="${KERNELDIR}/gcc32/bin/arm-eabi-"
+    else
+        make -j$(nproc --all) O=out ARCH=arm64 CROSS_COMPILE="${KERNELDIR}/gcc/bin/aarch64-elf-" CROSS_COMPILE_COMPAT="${KERNELDIR}/gcc32/bin/arm-eabi-"
     fi
 
     # Check if compilation is done successfully.
