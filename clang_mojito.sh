@@ -18,7 +18,7 @@ COMPILER_TYPES=gcc
 # Pick your poison
 if [[ "${COMPILER_TYPES}" =~ "clang" ]]; then
         git clone https://android.googlesource.com/platform/prebuilts/clang/host/linux-x86 -b android15-release --depth=1  "${KERNELDIR}/clang"
-      	git clone https://github.com/mvaisakh/gcc-arm64 -b gcc-master --depth=1 "${KERNELDIR}/gcc"
+      	git clone https://github.com/kdrag0n/aarch64-elf-gcc -b 9.x --depth=1 "${KERNELDIR}/gcc"
         git clone https://github.com/kdrag0n/arm-eabi-gcc --depth=1 "${KERNELDIR}/gcc32"
         COMPILER_STRING='google clang 17'
         COMPILER_TYPE='google clang 17'
