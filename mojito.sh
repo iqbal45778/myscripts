@@ -36,7 +36,7 @@ DISTRO=$(source /etc/os-release && echo ${NAME})
 
 # Export custom KBUILD
 export OUTFILE=${OUTDIR}/arch/arm64/boot/Image
-export OUTFILE=${OUTDIR}/arch/arm64/boot/dtb
+export OUTFILE=${OUTDIR}/arch/arm64/boot/dtb.img
 export OUTFILE=${OUTDIR}/arch/arm64/boot/dtbo.img
 export KBUILD_BUILD_HOST=android
 #export CLANG_PATH=${KERNELDIR}/clang/clang-r498229b
@@ -115,7 +115,7 @@ makekernel() {
 shipkernel() {
     # Copy compiled kernel
     cp "${OUTDIR}"/arch/arm64/boot/Image "${ANYKERNEL}"/
-    cp "${OUTDIR}"/arch/arm64/boot/dtb "${ANYKERNEL}"/
+    cp "${OUTDIR}"/arch/arm64/boot/dtb.img "${ANYKERNEL}"/
     cp "${OUTDIR}"/arch/arm64/boot/dtbo.img "${ANYKERNEL}"/
    
     # Zip the kernel, or fail
