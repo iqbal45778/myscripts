@@ -39,8 +39,8 @@ export OUTFILE=${OUTDIR}/arch/arm64/boot/Image
 export OUTFILE=${OUTDIR}/arch/arm64/boot/dtb.img
 export OUTFILE=${OUTDIR}/arch/arm64/boot/dtbo.img
 export KBUILD_BUILD_HOST=android
-#export CLANG_PATH=${KERNELDIR}/clang/clang-r498229b
-#export PATH=${CLANG_PATH}/bin:${PATH}
+export CLANG_PATH=${KERNELDIR}/clang/clang-r498229b
+export PATH=${CLANG_PATH}/bin:${PATH}
 export ARCH=arm64
 export DATE=$(TZ=Asia/Jakarta date)
 # Kernel groups
@@ -50,7 +50,7 @@ CI_CHANNEL=-1001488385343
 KERNELRELEASE=sunny/mojito
 
 # Clang is annoying
-#PATH="${KERNELDIR}/clang/clang-r498229b/bin:${PATH}"
+PATH="${KERNELDIR}/clang/clang-r498229b/bin:${PATH}"
 
 # Set date and time
 DATE=$(TZ=Asia/Jakarta date)
