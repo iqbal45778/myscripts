@@ -28,6 +28,10 @@ export TOTAL_RAM_GB
 PROCS=$(nproc --all)
 export PROCS
 
+# Set environment for directory
+KERNEL_DIR=$PWD
+IMG_DIR="$KERNEL_DIR"/out/arch/arm64/boot
+
 # Get CPU name
 export CPU_NAME="$(lscpu | sed -nr '/Model name/ s/.*:\s*(.*) */\1/p')"
 
@@ -36,7 +40,6 @@ DISTRO=$(source /etc/os-release && echo ${NAME})
 
 # Export custom KBUILD
 export OUTFILE=${OUTDIR}/arch/arm64/boot/Image
-export OUTFILE=${OUTDIR}/arch/arm64/boot/dtb.img
 export OUTFILE=${OUTDIR}/arch/arm64/boot/dtbo.img
 export KBUILD_BUILD_HOST=android
 export CLANG_PATH=${KERNELDIR}/clang/clang-r498229b
@@ -47,7 +50,7 @@ export DATE=$(TZ=Asia/Jakarta date)
 CI_CHANNEL=-1001488385343
 
 # Kernel revision
-KERNELRELEASE=sunny/mojito
+KERNELRELEASE=mojito
 
 # Clang is annoying
 PATH="${KERNELDIR}/clang/clang-r498229b/bin:${PATH}"
@@ -125,12 +128,12 @@ makekernel() {
 # Ship the compiled kernel
 shipkernel() {
     # Copy compiled kernel
-    cp "${OUTDIR}"/arch/arm64/boot/Image "${ANYKERNEL}"/
-    cp "${OUTDIR}"/arch/arm64/boot/dtb.img "${ANYKERNEL}"/
-    cp "${OUTDIR}"/arch/arm64/boot/dtbo.img "${ANYKERNEL}"/
-   
-    # Zip the kernel, or fail
+    cat "$IMG_DIR"/dts/qcom/sm6150.dtb > anykernel3/dtb
+    mv "$IMG_DIR"/dtbo.img anykernel3/dtbo.img
+    mv "$IMG_DIR"/Image anykernel3/Image
     cd "${ANYKERNEL}" || exit
+    
+    # Archive to flashable zip
     zip -r9 "${TEMPZIPNAME}" *
 
     # Ship it to the CI channel
